@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mtb_app/view_model/Categories_View_Model.dart';
 
 class EcranCategories extends StatefulWidget {
@@ -18,10 +17,40 @@ class _EcranCategoriesState extends State<EcranCategories> {
     super.initState();
   }
 
-  @override
+ @override
   Widget build(BuildContext context) {
-    // final userSharedPreferences = Provider.of<UserViewModel>(context);
-
-    return Scaffold(); //A finir d'implémenter
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Catégories'),
+      ),
+      body: Row(
+        children: [
+          Expanded(
+            child: ListTile(
+              title: Text('Bike'),
+              onTap: () {
+                // Action à effectuer lorsque la catégorie 1 est sélectionnée
+              },
+            ),
+          ),
+          Expanded(
+            child: ListTile(
+              title: Text('Equipement'),
+              onTap: () {
+                // Action à effectuer lorsque la catégorie 2 est sélectionnée
+              },
+            ),
+          ),
+          Expanded(
+            child: ListTile(
+              title: Text('Formule'),
+              onTap: () {
+                // Action à effectuer lorsque la catégorie 3 est sélectionnée
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
