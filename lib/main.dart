@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UtilisateursViewModel()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'MTB PARK INFO',
         theme: ThemeData(
           // This is the theme of your application.
           //
