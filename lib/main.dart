@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mtb_app/utils/routes/routes.dart';
 import 'package:mtb_app/utils/routes/routes_name.dart';
 import 'package:mtb_app/view/Articles/ecran_Articles.dart';
+import 'package:mtb_app/view/Articles/ecran_Articles_equipement.dart';
 import 'package:mtb_app/view/Articles/ecran_Categories.dart';
 import 'package:mtb_app/view/Utilisateurs/ecran_Connexion.dart';
 import 'package:mtb_app/view_model/LogSignIn_View_Model.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: EcranArticles(),
+    home: EcranArticlesEquipements(),
   ));
 }
 
