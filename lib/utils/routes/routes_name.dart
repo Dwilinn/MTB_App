@@ -15,4 +15,8 @@ class RoutesName {
   //Page lié aux articles
   static const String categories = "ecran_Categories";
   static const String articles = "ecran_Articles";
+  static const String articlesTarifs = "ecran_Articles_tarifs";
+  static const String articlesEquipements = "ecran_Articles_equipement";
+  static const String panier = "ecran_Panier";
+  static const String succes = "ecran_Succes";
 }

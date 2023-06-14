@@ -22,9 +22,9 @@ class AcceuilViewModel with ChangeNotifier {
 
   late BitmapDescriptor markerIcon;
 
-  Future<void> _onPanelCreated(PanelController _pc) async {
-    this._pc = _pc;
-  }
+  // Future<void> _onPanelCreated(PanelController _pc) async {
+  //   this._pc = _pc;
+  // }
 
   void _onMapCreated(GoogleMapController controller) {
     this.controller = controller;

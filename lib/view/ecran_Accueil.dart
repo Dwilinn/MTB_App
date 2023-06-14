@@ -8,8 +8,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import 'Articles/ecran_Panier.dart';
-
 class EcranAccueil extends StatefulWidget {
   EcranAccueil({Key? key}) : super(key: key);
 
@@ -19,13 +17,12 @@ class EcranAccueil extends StatefulWidget {
 
 class _EcranAcceuilState extends State<EcranAccueil> {
   final AcceuilViewModel acceuilViewViewModel = AcceuilViewModel();
-  late final PanelController _pc;
+  // late final PanelController _pc;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    acceuilViewViewModel._onPanelCreated(_pc);
     acceuilViewViewModel.fetchMapData();
     acceuilViewViewModel.addCustomIcon();
   }
@@ -79,7 +76,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                   // Navigator.pop(context);
                 },
               ),
-                            ListTile(
+              ListTile(
                 leading: const Icon(
                   Icons.category,
                 ),
@@ -87,11 +84,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                 onTap: () {
                   // Update the state of the app.
                   // ...
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => EcranPanier()),
-                );
-                  // Navigator.pop(context);
+                  Navigator.pushNamed(context, RoutesName.panier);
                 },
               ),
               ListTile(
@@ -106,7 +99,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
           ),
         ),
         body: SlidingUpPanel(
-          controller: acceuilViewViewModel._pc,
+          // controller: acceuilViewViewModel._pc,
           renderPanelSheet: false,
           panel: _floatingPanel(),
           collapsed: _floatingCollapsed(),
@@ -126,8 +119,8 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                       target: LatLng(48.583328, 7.75),
                       zoom: 11.0,
                     ),
-                    markers:
-                        Set<Marker>.of(acceuilViewViewModel.markers.values),
+                    // markers:
+                    //     Set<Marker>.of(acceuilViewViewModel.markers.values),
                   ),
                 ),
                 Positioned(

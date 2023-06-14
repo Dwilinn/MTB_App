@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtb_app/utils/routes/routes_name.dart';
+import 'package:mtb_app/view/Articles/ecran_Articles_equipement.dart';
+import 'package:mtb_app/view/Articles/ecran_Articles_tarifs.dart';
+import 'package:mtb_app/view/Articles/ecran_Panier.dart';
 
 import 'package:mtb_app/view/ecran_Splash.dart';
 import 'package:mtb_app/view/ecran_Accueil.dart';
@@ -35,6 +38,16 @@ class Routes {
       case RoutesName.articles:
         return MaterialPageRoute(
             builder: (BuildContext context) => const EcranArticles());
+      case RoutesName.articlesTarifs:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const EcranArticlesTarif());
+      case RoutesName.articlesEquipements:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>
+                const EcranArticlesEquipements());
+      case RoutesName.panier:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const EcranPanier());
       default:
         return MaterialPageRoute(
             builder: (BuildContext context) => const Scaffold(

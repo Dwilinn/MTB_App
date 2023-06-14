@@ -1,37 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:supabase/supabase.dart';
+import 'package:mtb_app/view_model/Modification_View_Model.dart';
 
 const supabaseUrl = 'https://vktppzsdiaezltvllnst.supabase.co';
 const supabaseKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrdHBwenNkaWFlemx0dmxsbnN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYxMzM0NTgsImV4cCI6MjAwMTcwOTQ1OH0.3ARyrzhars3csUTebH8yb17dqaVeyAeSGLODZKEkbUc';
 final supabaseClient = SupabaseClient(supabaseUrl, supabaseKey);
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class EcranModification extends StatefulWidget {
+  const EcranModification({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Modification de compte',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: AccountModificationPage(),
-    );
-  }
+  State<EcranModification> createState() => _EcranModificationState();
 }
 
-class AccountModificationPage extends StatefulWidget {
-  @override
-  _AccountModificationPageState createState() =>
-      _AccountModificationPageState();
-}
+class _EcranModificationState extends State<EcranModification> {
+  final ModificationViewModel acceuilViewViewModel = ModificationViewModel();
 
-class _AccountModificationPageState extends State<AccountModificationPage> {
   late Future<Map<String, dynamic>>? _userDataFuture;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
@@ -48,43 +33,46 @@ class _AccountModificationPageState extends State<AccountModificationPage> {
     _userDataFuture = fetchUserData();
   }
 
-late String userId = '1';
+  late String userId = '1';
 
-Future<Map<String, dynamic>> fetchUserData() async {
-  PostgrestResponse<dynamic> response =
-      await supabaseClient.from('users').select().eq('id', userId).single().execute();
-  if (response.error == null) {
-    final data = response.data;
-    _usernameController.text = data['pseudo'] ?? '';
-    _ageController.text = data['age']?.toString() ?? '';
-    _emailController.text = data['email'] ?? '';
-    _passwordController.text = data['password'] ?? '';
-    _nomController.text = data['nom'] ?? '';
-    _prenomController.text = data['prenom'] ?? '';
-    _sexeController.text = data['sexe'] ?? '';
-    return data;
-  } else {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Erreur'),
-          content: Text(response.error!.message),
-          actions: [
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-    return {};
+  Future<Map<String, dynamic>> fetchUserData() async {
+    PostgrestResponse<dynamic> response = await supabaseClient
+        .from('users')
+        .select()
+        .eq('id', userId)
+        .single()
+        .execute();
+    if (response.error == null) {
+      final data = response.data;
+      _usernameController.text = data['pseudo'] ?? '';
+      _ageController.text = data['age']?.toString() ?? '';
+      _emailController.text = data['email'] ?? '';
+      _passwordController.text = data['password'] ?? '';
+      _nomController.text = data['nom'] ?? '';
+      _prenomController.text = data['prenom'] ?? '';
+      _sexeController.text = data['sexe'] ?? '';
+      return data;
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Erreur'),
+            content: Text(response.error!.message),
+            actions: [
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return {};
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
