@@ -11,11 +11,11 @@ import 'package:mtb_app/view_model/LogSignIn_View_Model.dart';
 import 'package:mtb_app/view_model/Utilisateurs_View_Model.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+/*void main() {
   runApp(MaterialApp(
     home: EcranPanier(),
   ));
-}
+}*/
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
