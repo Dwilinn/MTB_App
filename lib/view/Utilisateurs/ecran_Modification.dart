@@ -48,14 +48,11 @@ class _AccountModificationPageState extends State<AccountModificationPage> {
     _userDataFuture = fetchUserData();
   }
 
-  Future<Map<String, dynamic>> fetchUserData() async {
-    final response = await supabaseClient
-        .from('users')
-        .select()
-        .single()
-        .execute();
-
+  Future<void> fetchUserData() async {
+    PostgrestResponse<dynamic> response =
+        await supabaseClient.from('users').select().single().execute();
     if (response.error == null) {
+      //response.error = null
       final data = response.data;
       _usernameController.text = data['pseudo'] ?? '';
       _ageController.text = data['age']?.toString() ?? '';
