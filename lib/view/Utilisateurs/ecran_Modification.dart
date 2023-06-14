@@ -32,7 +32,7 @@ class AccountModificationPage extends StatefulWidget {
 }
 
 class _AccountModificationPageState extends State<AccountModificationPage> {
-  late Future<Map<String, dynamic>> _userDataFuture;
+  late Future<Map<String, dynamic>>? _userDataFuture;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -48,42 +48,43 @@ class _AccountModificationPageState extends State<AccountModificationPage> {
     _userDataFuture = fetchUserData();
   }
 
-  Future<void> fetchUserData() async {
-    PostgrestResponse<dynamic> response =
-        await supabaseClient.from('users').select().single().execute();
-    if (response.error == null) {
-      //response.error = null
-      final data = response.data;
-      _usernameController.text = data['pseudo'] ?? '';
-      _ageController.text = data['age']?.toString() ?? '';
-      _emailController.text = data['email'] ?? '';
-      _passwordController.text = data['password'] ?? '';
-      _nomController.text = data['nom'] ?? '';
-      _prenomController.text = data['prenom'] ?? '';
-      _sexeController.text = data['sexe'] ?? '';
-      return data;
-    } else {
-      // Une erreur s'est produite lors de la récupération des données de l'utilisateur
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Erreur'),
-            content: Text(response.error!.message),
-            actions: [
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-      return {};
-    }
+late String userId = '1';
+
+Future<Map<String, dynamic>> fetchUserData() async {
+  PostgrestResponse<dynamic> response =
+      await supabaseClient.from('users').select().eq('id', userId).single().execute();
+  if (response.error == null) {
+    final data = response.data;
+    _usernameController.text = data['pseudo'] ?? '';
+    _ageController.text = data['age']?.toString() ?? '';
+    _emailController.text = data['email'] ?? '';
+    _passwordController.text = data['password'] ?? '';
+    _nomController.text = data['nom'] ?? '';
+    _prenomController.text = data['prenom'] ?? '';
+    _sexeController.text = data['sexe'] ?? '';
+    return data;
+  } else {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Erreur'),
+          content: Text(response.error!.message),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+    return {};
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
