@@ -34,6 +34,25 @@ class _EcranArticlesEquipementsState extends State<EcranArticlesEquipements> {
     }
   }
 
+  Future<void> addToPanier(Map<String, dynamic> equipement) async {
+    final insertResponse = await supabaseClient
+        .from('panier')
+        .insert([
+          {
+            'id_articles': equipement['id'],
+            'type': equipement['equipement'],
+            'tarif': equipement['tarif']
+          }
+        ])
+        .execute();
+
+    if (insertResponse.error != null) {
+      print(insertResponse.error);
+    } else {
+      print('Equipement ajouté au panier avec succès');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // final userSharedPreferences = Provider.of<UserViewModel>(context);
@@ -52,6 +71,9 @@ class _EcranArticlesEquipementsState extends State<EcranArticlesEquipements> {
           return ListTile(
             title: Text(equipementName),
             trailing: Text('$tarif €'),
+            onTap: () {
+              addToPanier(equipement);
+            },
           );
         },
       ),
