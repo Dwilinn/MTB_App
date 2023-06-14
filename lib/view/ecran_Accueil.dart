@@ -17,16 +17,15 @@ class EcranAccueil extends StatefulWidget {
 
 class _EcranAcceuilState extends State<EcranAccueil> {
   final AcceuilViewModel acceuilViewViewModel = AcceuilViewModel();
-
-  static const LatLng _kMapCenter = LatLng(48.583328, 7.75);
-
-  static const CameraPosition _kInitialPosition =
-      CameraPosition(target: _kMapCenter, zoom: 11.0, tilt: 0, bearing: 0);
+  late final PanelController _pc;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    acceuilViewViewModel._onPanelCreated(_pc);
+    acceuilViewViewModel.fetchMapData();
+    acceuilViewViewModel.addCustomIcon();
   }
 
   @override
@@ -90,6 +89,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
           ),
         ),
         body: SlidingUpPanel(
+          controller: acceuilViewViewModel._pc,
           renderPanelSheet: false,
           panel: _floatingPanel(),
           collapsed: _floatingCollapsed(),
@@ -104,8 +104,13 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                   width: double.infinity,
                   color: Colors.lightBlue,
                   child: const GoogleMap(
-                    initialCameraPosition: _kInitialPosition,
                     zoomControlsEnabled: false,
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(48.583328, 7.75),
+                      zoom: 11.0,
+                    ),
+                    markers:
+                        Set<Marker>.of(acceuilViewViewModel.markers.values),
                   ),
                 ),
                 Positioned(
@@ -153,13 +158,13 @@ class _EcranAcceuilState extends State<EcranAccueil> {
 
   Widget _floatingCollapsed() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.blueGrey,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
       margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
-      child: Center(
+      child: const Center(
         child: Text(
           "This is the collapsed Widget",
           style: TextStyle(color: Colors.white),
@@ -170,7 +175,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
 
   Widget _floatingPanel() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(24.0)),
           boxShadow: [
@@ -180,7 +185,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
             ),
           ]),
       margin: const EdgeInsets.all(24.0),
-      child: Center(
+      child: const Center(
         child: Text("This is the SlidingUpPanel when open"),
       ),
     );
