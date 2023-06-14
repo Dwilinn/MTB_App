@@ -72,6 +72,18 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                 },
               ),
               ListTile(
+                leading: const Icon(
+                  Icons.category,
+                ),
+                title: const Text('Utilisateur'),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                  Navigator.pushNamed(context, RoutesName.modification);
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
                 leading: const Icon(Icons.warning_amber),
                 title: const Text('Termes d\'utilisation'),
                 onTap: () {
@@ -85,7 +97,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
         body: SlidingUpPanel(
           backdropEnabled: true,
           panel: const Center(
-            child: Text("This is the sliding Widget"),
+            child: Text("Menu Slide pour les pointeurs"),
           ),
           collapsed: Container(
             // ignore: prefer_const_constructors
@@ -93,7 +105,7 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                 BoxDecoration(color: Colors.blueGrey, borderRadius: radius),
             child: Center(
               child: Text(
-                "This is the collapsed Widget",
+                "Menu Slide pour les pointeurs",
                 style: TextStyle(color: Colors.white),
               ),
             ),
