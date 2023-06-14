@@ -31,11 +31,6 @@ class _EcranAcceuilState extends State<EcranAccueil> {
 
   @override
   Widget build(BuildContext context) {
-    BorderRadiusGeometry radius = BorderRadius.only(
-      topLeft: Radius.circular(24.0),
-      topRight: Radius.circular(24.0),
-    );
-
     return MaterialApp(
       home: Scaffold(
         drawer: Drawer(
@@ -95,21 +90,9 @@ class _EcranAcceuilState extends State<EcranAccueil> {
           ),
         ),
         body: SlidingUpPanel(
-          backdropEnabled: true,
-          panel: const Center(
-            child: Text("Menu Slide pour les pointeurs"),
-          ),
-          collapsed: Container(
-            // ignore: prefer_const_constructors
-            decoration:
-                BoxDecoration(color: Colors.blueGrey, borderRadius: radius),
-            child: Center(
-              child: Text(
-                "Menu Slide pour les pointeurs",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
+          renderPanelSheet: false,
+          panel: _floatingPanel(),
+          collapsed: _floatingCollapsed(),
           body: Center(
             child: Stack(
               fit: StackFit.passthrough,
@@ -167,7 +150,44 @@ class _EcranAcceuilState extends State<EcranAccueil> {
       ),
     );
   }
+
+  Widget _floatingCollapsed() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.blueGrey,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
+      ),
+      margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
+      child: Center(
+        child: Text(
+          "This is the collapsed Widget",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  Widget _floatingPanel() {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(24.0)),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20.0,
+              color: Colors.grey,
+            ),
+          ]),
+      margin: const EdgeInsets.all(24.0),
+      child: Center(
+        child: Text("This is the SlidingUpPanel when open"),
+      ),
+    );
+  }
 }
+
+
 
 
     // return Scaffold(

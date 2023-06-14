@@ -49,7 +49,7 @@ class _EcranModificationState extends State<EcranModification> {
   Future<void> fetchUserData() async {
     PostgrestResponse<dynamic> response =
         await supabaseClient.from('users').select().single().execute();
-    if (true) {
+    if (response.error == null) {
       //response.error = null
       final data = response.data;
       _usernameController.text = data['pseudo'] ?? '';
@@ -66,7 +66,7 @@ class _EcranModificationState extends State<EcranModification> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Erreur'),
-            // content: Text(response.error!.message),
+            content: Text(response.error!.message),
             actions: [
               TextButton(
                 child: const Text('OK'),
@@ -199,7 +199,7 @@ class _EcranModificationState extends State<EcranModification> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text('Erreur'),
-                        // content: Text(response.error!.message),
+                        content: Text(response.error!.message),
                         actions: [
                           TextButton(
                             child: const Text('OK'),
