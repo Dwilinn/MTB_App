@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../view_model/services/splash_services.dart';
 
@@ -21,15 +23,24 @@ class _EcranSplashState extends State<EcranSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: const Icon(
+          Icons.spa_rounded,
+        ),
+        title: const Text(
+          'Moutain Bike Map',
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: const [
           Center(
-              child: Text(
-            'Ecran Splash',
-            style: Theme.of(context).textTheme.headline3,
-          )),
+            child: Image(
+              image: AssetImage('lib/ressources/Assets/Images/MapIcon.jpg'),
+            ),
+          ),
         ],
       ),
     );

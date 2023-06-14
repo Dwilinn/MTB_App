@@ -15,10 +15,10 @@ class SplashServices {
     getUserData().then((value) async {
       print(value.token);
       if (value.token == "null" || value.token.toString() == "") {
-        await Future.delayed(Duration(seconds: 3));
+        await Future.delayed(Duration(seconds: 5));
         Navigator.pushNamed(context, RoutesName.connexion);
       } else {
-        await Future.delayed(Duration(seconds: 3));
+        await Future.delayed(Duration(seconds: 5));
         Navigator.pushNamed(context, RoutesName.accueil);
       }
     }).onError((error, stackTrace) {

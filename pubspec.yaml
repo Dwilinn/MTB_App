@@ -42,6 +42,8 @@ dependencies:
   another_flushbar: ^1.12.30
   fluttertoast: ^8.2.2
   google_maps_flutter: ^2.3.0
+  sliding_up_panel: ^2.0.0+1
+  supabase: ^1.9.3
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +66,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - lib/ressources/Assets/Images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

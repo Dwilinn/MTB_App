@@ -17,6 +17,8 @@ class LogSignInViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  test() {}
+
   bool _signUpLoading = false;
   bool get signUploading => _signUpLoading;
   setSignUpLoading(bool value) {
