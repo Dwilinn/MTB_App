@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'Articles/ecran_Panier.dart';
+
 class EcranAccueil extends StatefulWidget {
   EcranAccueil({Key? key}) : super(key: key);
 
@@ -80,6 +82,21 @@ class _EcranAcceuilState extends State<EcranAccueil> {
                   // Update the state of the app.
                   // ...
                   Navigator.pushNamed(context, RoutesName.modification);
+                  // Navigator.pop(context);
+                },
+              ),
+                            ListTile(
+                leading: const Icon(
+                  Icons.category,
+                ),
+                title: const Text('Panier'),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EcranPanier()),
+                );
                   // Navigator.pop(context);
                 },
               ),
